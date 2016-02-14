@@ -32,8 +32,10 @@ public class Sports extends HttpServlet {
         SyndFeed newsfeed = null;
         try {
             newsfeed = input.build(new XmlReader(http));
-        } catch (IllegalArgumentException | FeedException e) {
+        } catch (FeedException e) {
+            e.printStackTrace();
         }
+
         List entries = newsfeed.getEntries();
         Iterator itEntries = entries.iterator();
 
