@@ -26,7 +26,7 @@ public class Sports extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        URL url = new URL("http://www.dnevnik.bg/rssc/?rubrid=2368");
+        URL url = new URL("http://www.sportal.bg/uploads/rss_category_0.xml");
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed newsfeed = null;
@@ -45,11 +45,12 @@ public class Sports extends HttpServlet {
 
         while (itEntries.hasNext()) {
             SyndEntry entry = (SyndEntry) itEntries.next();
-            writer.print("<a href=\"" + entry.getLink() + "\">" );
-            writer.print("<h3>" + entry.getTitle() + "</h3>" + "</a>");
-            writer.print("<p>" + entry.getDescription().getValue() + "</p>\n");
-            writer.print(entry.getAuthor() + "\n");
-            writer.print(entry.getPublishedDate().toString());
+            writer.write("<a href=\"" + entry.getLink() + "\">" );
+            writer.write("<h3>" + entry.getTitle() + "</h3>" + "</a>");
+            writer.write("<p>" + entry.getDescription().getValue() + "</p>\n");
+            writer.write(entry.getAuthor() + "\n");
+            writer.write(entry.getPublishedDate().toString());
+            writer.flush();
 
         }
     }
